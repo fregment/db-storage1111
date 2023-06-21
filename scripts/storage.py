@@ -7,9 +7,9 @@ import gradio as gr
 # from pymongo import MongoClient
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()  # take environment variables from .env.
+# load_dotenv()  # take environment variables from .env.
 
 # mongo_host = os.environ.get('DB_HOST', 'localhost')
 # mongo_port = int(os.environ.get('DB_PORT', 27017))
