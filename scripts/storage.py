@@ -11,6 +11,9 @@ mongo_port = int(os.environ.get('DB_PORT', 27017))
 mongo_username = os.environ.get('DB_USER', '')
 mongo_password = os.environ.get('DB_PASS', '')
 
+
+# Rewrite this to use supabase instead of mongo
+# images to be stored in supabase storage
 creds = f"{mongo_username}:{mongo_password}@" if mongo_username and mongo_password else ""
 client = MongoClient(f"mongodb://{creds}{mongo_host}:{mongo_port}/")
 
