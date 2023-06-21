@@ -4,18 +4,28 @@ import os
 import re
 import modules.scripts as scripts
 import gradio as gr
-from pymongo import MongoClient
+# from pymongo import MongoClient
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+from dotenv import load_dotenv
 
-mongo_host = os.environ.get('DB_HOST', 'localhost')
-mongo_port = int(os.environ.get('DB_PORT', 27017))
+load_dotenv()  # take environment variables from .env.
+
+# mongo_host = os.environ.get('DB_HOST', 'localhost')
+# mongo_port = int(os.environ.get('DB_PORT', 27017))
 mongo_username = os.environ.get('DB_USER', '')
 mongo_password = os.environ.get('DB_PASS', '')
+mongo_cluster = os.environ.get('DB_CLUSTER', '')
 
 
 # Rewrite this to use supabase instead of mongo
 # images to be stored in supabase storage
-creds = f"{mongo_username}:{mongo_password}@" if mongo_username and mongo_password else ""
-client = MongoClient(f"mongodb://{creds}{mongo_host}:{mongo_port}/")
+# creds = f"{mongo_username}:{mongo_password}@" if mongo_username and mongo_password else ""
+# client = MongoClient(f"mongodb://{creds}{mongo_host}:{mongo_port}/")
+
+uri = f"mongodb+srv://{mongo_username}:{mongo_password}@{mongo_cluster}/?retryWrites=true&w=majority"
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
 
 
 def get_collection(database_name, collection_name):
